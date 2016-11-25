@@ -37,9 +37,13 @@ server.listen(port, function () {
       , "--disable-infobars" 
       , "--disable-suggestions-service" 
       , "--disable-save-password-bubble" 
+      , "--disable-session-crashed-bubble"
       , "--start-maximized" 
+      , "--incognito"
+      , "--noerrdialogs"
+      , "--no-context-menu"         
       , "--kiosk" 
-      , "localhost:3000"
+      , "http://localhost:"+port+"/viewer"
     ]
   const chromium = spawn('chromium-browser', commKiosk);
 
