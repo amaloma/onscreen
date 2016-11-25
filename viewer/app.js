@@ -28,6 +28,9 @@ app.use('/users', users);
 var viewer = require('./routes/viewer');
 app.use('/viewer', viewer);
 
+var splash_page = require('./routes/splash_page');
+app.use('/splash_page', splash_page);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
