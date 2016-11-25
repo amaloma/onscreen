@@ -30,6 +30,10 @@ sudo apt-get install unclutter
 add "unclutter -idle 1 -root &" in /etc/xdg/openbox/autostart
 sudo nano /etc/xdg/openbox/autostart
 
+Hide chromium scrollbar
+==========================
+install "No Scroll Bars Pleasel" extensions
+
 Install nodejs and npm
 ======================
 sudo apt-get update
