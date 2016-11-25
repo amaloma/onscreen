@@ -6,6 +6,11 @@ router.get('/', function(req, res, next) {
   res.render('viewer', { title: 'ONScreen' });
 });
 
+router.get('/black', function(req, res, next) {
+  res.render('black', { title: 'ONScreen' });
+});
+
+
 router.get('/splash_page', function(req, res, next) {
   var dataObj = {};
   dataObj. title = 'ONScreen';
