@@ -1,0 +1,36 @@
+Static ip: sudo nano /etc/etc/dhcpcd.conf #and append
+=====================================================
+# Custom static IP address for eth0.
+interface eth0
+static ip_address=192.168.1.11/24
+static routers=192.168.1.1
+static domain_name_servers=192.168.1.1
+
+Disable login
+=============
+sudo systemctl disable getty@tty1.service
+
+Hide logo 4 raspberry
+=====================
+sudo nano /boot/cmdline.txt #append 
+logo.nologo
+
+Splashscreen
+============
+Append "quiet splash plymouth.ignore-serial-consoles" to /boot/cmdline.txt
+sudo cp -R onscreen/ /usr/share/plymouth/themes
+sudo plymouth-set-default-theme --list
+sudo plymouth-set-default-theme onscreen
+sudo plymouth-set-default-theme
+sudo reboot
+
+Auto hide the mouse cursor
+==========================
+sudo apt-get install unclutter
+add "unclutter -idle 1 -root &" in /etc/xdg/openbox/autostart
+sudo nano /etc/xdg/openbox/autostart
+
+Install nodejs and npm
+======================
+sudo apt-get update
+sudo apt-get install nodejs npm

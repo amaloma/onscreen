@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=onscreen
+Description=oncreen Splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/onscreen
+ScriptFile=/usr/share/plymouth/themes/onscreen/onscreen.script
