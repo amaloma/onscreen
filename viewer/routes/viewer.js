@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('viewer', { title: 'ONScreen' });
+  var ip = '192.168.1.11'
+  var port = '3000'
+  res.render('viewer', { title: 'ONScreen', url: 'http://'+ip+':'+port });
 });
 
 router.get('/black', function(req, res, next) {

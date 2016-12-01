@@ -3,6 +3,29 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    h1= title
-    p Welcome to #{title}
+    style.
+      body {
+        margin: 0; padding: 0; height: 100%; overflow: hidden;
+      }
+      iframe {
+        display: block;       /* iframes are inline by default */       
+        border: none;         /* Reset default border */
+        height: 100vh;        /* Viewport-relative units */
+        width: 100vw;
+      }
+  body    
+    iframe(src="/viewer/black" id="myframe")
+    script(src="/socket.io/socket.io.js")
+    script.
+      var socket = io.connect("#{url}");
+      var delay;
+      socket.on('viewer start', function (data) { 
+        document.getElementById("myframe").src = data.src;       
+        console.log(data);
+        clearTimeout(delay);
+        delay = setTimeout(function() { 
+          console.log('delay setTimeout', data.delay);
+          socket.emit('viewer end', { list: 1 });
+        }, data.delay*1000);
+      });
+

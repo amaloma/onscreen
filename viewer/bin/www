@@ -122,5 +122,19 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
+/**
+ * socket.io
+ */
+var io = require('socket.io')(server);
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/index.html');
+});
+
+io.on('connection', function (socket) {
+  socket.emit('viewer start', { list: 0, src: '/viewer/splash_page', delay: 10 });
+  socket.on('viewer end', function (data) {
+    console.log(data);
+  });
+});
 
 
