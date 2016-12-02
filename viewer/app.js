@@ -29,6 +29,9 @@ app.use('/users', users);
 var viewer = require('./routes/viewer');
 app.use('/viewer', viewer);
 
+var api = require('./routes/api');
+app.use('/api', api);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -59,7 +62,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 
 module.exports = app;
