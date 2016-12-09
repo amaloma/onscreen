@@ -1,0 +1,13 @@
+{
+  "_comment": "; Only display pages with proper SSL certificates",
+  "configdir": "./",
+  "database": "./viewer.db",
+  "use_24_hour_clock": true,
+  "show_splash": true,
+  "audio_output": "local",
+  "shuffle_playlist": false,
+  "default_duration": "20",
+  "debug_logging": false,
+  "verify_ssl": true,
+  "title": "ONScreen"
+}

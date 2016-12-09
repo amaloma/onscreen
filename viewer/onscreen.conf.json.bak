@@ -1,0 +1,27 @@
+{
+  "_comment": "[main]" ,
+  "_comment": "; All paths are relative to the home dir." ,
+  "configdir" : "./" ,
+  "database" : "./viewer.db" ,
+  "use_24_hour_clock" : true ,
+
+  "_comment": "[viewer]" ,
+  "_comment": "; Show Screenly splash screen" ,
+  "show_splash" : true ,
+  "_comment": ";resolution : 1920x1080" ,
+
+  "_comment": "; 'local' or 'hdmi'" ,
+  "audio_output" : "hdmi" ,
+
+  "_comment": "; Shuffle playlist before playing (otherwise sorted by name)" ,
+  "shuffle_playlist" : false ,
+
+  "_comment": "; Asset duration default value" ,
+  "default_duration" : 10 ,
+
+  "_comment": "; Debug logging toggle " ,
+  "debug_logging" : false ,
+
+  "_comment": "; Only display pages with proper SSL certificates" ,
+  "verify_ssl" : true
+}
