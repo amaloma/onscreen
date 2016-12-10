@@ -254,29 +254,7 @@ html
 
   body
     #request-error.navbar.navbar-fixed-top
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          a.brand(href="/")
-            img(src='static/img/screenly_ose_logo.png')
-
-          ul.nav.pull-right
-            if up_to_date
-              li.update-available
-                a(href="http://www.screenlyapp.com/ose.html#upgrade")
-                  i.icon-circle-arrow-down.icon-white
-                  | Update Available
-            li
-              a(href="/settings")
-                i.icon-cog.icon-white
-                = '\n'
-                | Settings
-            li.divider-vertical
-            li
-              a(href="/system_info")
-                i.icon-tasks.icon-white
-                = '\n'
-                | System Info
+    include menu.pug
 
     .container
       .row

@@ -1,7 +1,33 @@
 var express = require('express');
 var router = express.Router();
-
 var fs = require('fs');
+const os = require('os');
+
+router.get('/system_info', function(req, res, next) { 
+  var loadavg = os.loadavg()
+  var uptime = os.uptime()
+  var freemem = os.freemem()
+  var totalmem = os.totalmem()
+  var conf = {};
+  conf.title = 'ONScreen'
+  conf.loadavg = Math.round(loadavg[0] * 10)  
+  conf.free_mem = Math.round(freemem/1024/1024)
+  conf.total_mem = Math.round(totalmem/1024/1024)
+  conf.uptime = Math.round(uptime/60/60/24)
+
+  const exec = require('child_process').exec;
+  exec('tvservice -s', function(error, stdout, stderr) {
+    conf.display_info = stdout
+    exec("df -h | tr -s ' ' '\t' | grep root | cut -f3-4", function(error, stdout, stderr) {
+      conf.free_space = stdout.split('\t').join(" of ")
+      exec("sudo systemctl status onscreen-viewer.service -n 20", function(error, stdout, stderr) {
+        conf.viewlog = stdout.split('\n')
+        res.render('system_info', conf ); 
+      });
+    });
+  });
+  
+});
 
 router.post('/settings', function(req, res, next) { 
   var conf = JSON.parse(fs.readFileSync('onscreen.conf.json', 'utf8'));

@@ -38,3 +38,7 @@ Install nodejs and npm
 ======================
 sudo apt-get update
 sudo apt-get install nodejs npm
+
+Set system time zone
+====================
+sudo timedatectl set-timezone Asia/Bangkok
