@@ -64,6 +64,21 @@ router.post('/assets', function(req, res, next) {
 });
 
 /* GET home page. ========================= */
+router.get('/isenabled', function(req, res, next) {
+  var resData = {}
+  datastore.find({is_enabled:1}).sort({ play_order: 1 }).exec(function (err, docs) {
+  // datastore.find({is_enabled:1}, function (err, docs) {
+    resData.err = 0; 
+    resData.msg = 'GET OK';
+    if(err) { 
+      resData.err = 1; 
+      resData.msg = err;
+    }
+    resData.docs = docs;
+    res.send(resData);
+  });   
+});
+
 router.get('/', function(req, res, next) {
   var resData = {}
   datastore.find({}, function (err, docs) {

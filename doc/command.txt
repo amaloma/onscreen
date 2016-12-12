@@ -33,6 +33,8 @@ sudo nano /etc/xdg/openbox/autostart
 Hide chromium scrollbar
 ==========================
 install "No Scroll Bars Pleasel" extensions
+go to chrome://extensions
+check Allow in incognito
 
 Install nodejs and npm
 ======================

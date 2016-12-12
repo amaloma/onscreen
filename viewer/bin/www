@@ -122,19 +122,63 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-/**
+/******************************************************************
  * socket.io
  */
+var fs = require('fs');
 var io = require('socket.io')(server);
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
-});
 
 io.on('connection', function (socket) {
-  socket.emit('viewer start', { list: 0, src: '/viewer/splash_page', delay: 10 });
+  var conf = JSON.parse(fs.readFileSync('onscreen.conf.json', 'utf8'));
+  if(conf.show_splash) {
+    socket.emit('viewer start', { list: 0, src: '/viewer/splash_page', delay: conf.splash_page_delay});
+  } else {
+    socket.emit('viewer start', { list: 0, src: '/viewer/black', delay: 1});  
+  }
   socket.on('viewer end', function (data) {
-    console.log(data);
+    // console.log('viewer end ->',data);
+    var request = require("request");
+    var uri = conf.url.protocal+'://localhost:'+conf.url.port+'/api/isenabled'
+    // console.log("uri ->",uri);
+    request({
+      uri: uri,
+      method: "GET",
+      timeout: 10000,
+      followRedirect: true,
+      maxRedirects: 10
+    }, function(error, response, body) {
+      var bodyObj = JSON.parse(body);
+      // console.log(JSON.stringify(bodyObj,null,2));
+      if(error || bodyObj.err || (!bodyObj.docs.length)) {
+        socket.emit('viewer start', { list: 0, src: '/viewer/black', delay: 1});
+        console.log("error || body.err || (!body.docs.length)");
+        return;
+      }
+      if(data.list > bodyObj.docs.length) data.list = 1
+      if(bodyObj.docs[data.list-1].mimetype == "video") {
+        const spawn = require('child_process').spawn;
+        const omx = spawn('omxplayer', ['-b', './public/video/cgi3d.mp4']);
+        socket.emit('viewer start', { list: data.list, src: '/viewer/black', delay: 9999});
+        omx.stdout.on('data', function(data) {
+          console.log("stdout:",data);
+        });
+        omx.stderr.on('data', function(data) {
+          console.log("stderr:",data);
+        });
+        omx.on('close', function(code) {
+          console.log("child process exited with code:",code);
+          socket.emit('viewer start', { list: data.list, src: '/viewer/black', delay: 1});
+        });
+      } else {
+        socket.emit('viewer start', { 
+          list: data.list, 
+          src: bodyObj.docs[data.list-1].uri, 
+          delay: bodyObj.docs[data.list-1].duration
+        });
+      }
+      console.log(bodyObj.docs[data.list-1]);
+    });
   });
 });
-
+ 
 

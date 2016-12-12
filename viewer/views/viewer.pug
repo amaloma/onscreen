@@ -13,7 +13,7 @@ html
         height: 100vh;        /* Viewport-relative units */
         width: 100vw;
       }
-  body    
+  body   
     iframe(src="/viewer/black" id="myframe")
     script(src="/socket.io/socket.io.js")
     script.
@@ -25,7 +25,8 @@ html
         clearTimeout(delay);
         delay = setTimeout(function() { 
           console.log('delay setTimeout', data.delay);
-          socket.emit('viewer end', { list: 1 });
+          var list = data.list+1
+          socket.emit('viewer end', { list: list });
         }, data.delay*1000);
       });
 
