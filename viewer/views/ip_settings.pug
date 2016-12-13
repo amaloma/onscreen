@@ -1,0 +1,61 @@
+doctype html
+html
+
+  head
+    meta(charset="utf-8")
+    title=title
+
+    include head.pug
+    link(href="/static/css/toggle-switch.css", rel="stylesheet")
+
+  body
+
+    include menu.pug
+
+    .container
+      .row
+        .span12
+          h1.page-header
+            | IP settings
+
+
+          if flash
+            <div class="alert alert-${flash['class']}">
+              = flash['message']
+            </div>
+
+          form.form-horizontal(method="post")
+            .control-group
+              label.control-label DHCP Client
+              .controls
+                label.checkbox.toggle.well#splash_checkbox
+                  if dhcp_client
+                    input(type="checkbox", checked="checked", name="dhcp_client")
+                  else
+                    input(type="checkbox", name="dhcp_client")
+                  p
+                    span.on Enable
+                    span.off Disable
+                  a.btn.btn-primary.slide-button
+            
+            .control-group
+              label.control-label IP
+              .controls
+                input(type="text", name="now_ip", value=now_ip)
+            
+            .control-group
+              label.control-label Routers
+              .controls
+                input(type="text", name="routers", value=routers)
+
+            .control-group
+              label.control-label DNS
+              .controls
+                input(type="text", name="dns", value=dns)
+
+            .form-actions
+              input.btn.btn-danger(type="submit", value="Save & Reboot")
+              = '\n'
+              a.btn(href="/") Cancel
+
+    include foot.pug

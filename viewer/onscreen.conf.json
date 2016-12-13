@@ -3,7 +3,7 @@
   "configdir": "./",
   "database": "./viewer.db",
   "use_24_hour_clock": true,
-  "show_splash": false,
+  "show_splash": true,
   "audio_output": "hdmi",
   "shuffle_playlist": false,
   "default_duration": "20",
@@ -15,5 +15,5 @@
     "ip": "localhost",
     "port": 3000
   },
-  "splash_page_delay": 10
+  "splash_page_delay": "5"
 }

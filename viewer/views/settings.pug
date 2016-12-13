@@ -5,10 +5,8 @@ html
     meta(charset="utf-8")
     title=title
 
-    link(href="/static/css/bootstrap.css", rel="stylesheet")
-    link(href="/static/css/screenly.css", rel="stylesheet")
+    include head.pug
     link(href="/static/css/toggle-switch.css", rel="stylesheet")
-    script(src="/static/js/jquery-1.9.1.min.js")
 
   body
 
@@ -18,7 +16,7 @@ html
       .row
         .span12
           h1.page-header
-            | Settings
+            | Config settings
 
 
           if flash
@@ -39,6 +37,11 @@ html
                     span.on On
                     span.off Off
                   a.btn.btn-primary.slide-button
+            
+            .control-group
+              label.control-label Show splash delay
+              .controls
+                input.span1(type="number", name="splash_page_delay", value=splash_page_delay)
 
             .control-group
               label.control-label Shuffle playlist

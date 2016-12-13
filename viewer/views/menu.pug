@@ -10,11 +10,22 @@
             a(href="http://www.screenlyapp.com/ose.html#upgrade")
               i.icon-circle-arrow-down.icon-white
               | Update Available
-        li
-          a(href="/settings")
+        li(role="presentation" class="dropdown")
+          //- a(href="/settings")
+          //-   i.icon-cog.icon-white
+          //-   = '\n'
+          //-   | Settings
+          a(data-toggle="dropdown")
             i.icon-cog.icon-white
             = '\n'
             | Settings
+
+            ul(class="dropdown-menu")
+              li 
+                a(href="/settings") Settings
+              li 
+                a(href="/ip_settings") Ip Settings
+
         li.divider-vertical
         li
           a(href="/system_info")

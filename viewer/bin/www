@@ -160,13 +160,13 @@ io.on('connection', function (socket) {
         const omx = spawn('omxplayer', ['-b', './public/video/cgi3d.mp4']);
         socket.emit('viewer start', { list: data.list, src: '/viewer/black', delay: 9999});
         omx.stdout.on('data', function(data) {
-          console.log("stdout:",data);
+          // console.log("stdout:",data);
         });
         omx.stderr.on('data', function(data) {
-          console.log("stderr:",data);
+          // console.log("stderr:",data);
         });
         omx.on('close', function(code) {
-          console.log("child process exited with code:",code);
+          // console.log("child process exited with code:",code);
           socket.emit('viewer start', { list: data.list, src: '/viewer/black', delay: 1});
         });
       } else {
@@ -176,7 +176,7 @@ io.on('connection', function (socket) {
           delay: bodyObj.docs[data.list-1].duration
         });
       }
-      console.log(bodyObj.docs[data.list-1]);
+      // console.log(bodyObj.docs[data.list-1]);
     });
   });
 });
