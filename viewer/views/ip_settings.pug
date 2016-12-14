@@ -24,7 +24,7 @@ html
               = flash['message']
             </div>
 
-          form.form-horizontal(method="post")
+          form.form-horizontal(method="post" onSubmit="if(!confirm('Are you sure to Reboot?')){return false;}")
             .control-group
               label.control-label DHCP Client
               .controls
